@@ -1,0 +1,21 @@
+---
+// MYFAlbum = Made For You Almbum
+
+interface Props {
+  id: string;
+  title: string;
+  artists: string[];
+  image: string;
+}
+
+const { id, title, artists, image } = Astro.props;
+---
+
+<a
+  class="bg-zinc-800 bg-opacity-35 p-2 rounded-md w-56 transition-colors hover:bg-zinc-700 cursor-pointer flex flex-col gap-y-2"
+  href={`/album/${id}`}
+>
+  <img src={image} alt={title} class="rounded-md" />
+  <b>{title}</b>
+  <p>{artists.join(", ")}</p>
+</a>

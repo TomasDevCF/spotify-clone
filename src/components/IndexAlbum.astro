@@ -1,0 +1,39 @@
+---
+import Play from "../icons/Play.astro";
+import PlayButton from "./PlayButton";
+
+interface Props {
+  image: string;
+  title: string;
+  id: string;
+}
+
+const { id, image, title } = Astro.props;
+---
+
+<a
+  href={`/album/${id}`}
+  class="album flex h-12 items-center rounded-md shadow-lg hover:shadow-xl outline-none bg-zinc-500/30 hover:bg-zinc-500/50 focus:bg-zinc-500/50 gap-2 transition-colors relative z-20 cursor-pointer"
+  transition:name=`playlist ${id} container`
+>
+  <img
+    class="h-full rounded-l-md"
+    src={image}
+    alt={title}
+    transition:name=`playlist ${id} image`
+  />
+  <b
+    class="md:max-w-[70%] max-w-[50%] text-ellipsis overflow-hidden text-nowrap pe-2 text-[0.8rem]"
+    >{title}</b
+  >
+  <button
+    class="bg-green-600 rounded-full h-10 w-10 flex items-center justify-center absolute right-4 z-10 shadow-2x hover:bg-green-500 text-black transition-all opacity-0"
+    ><PlayButton albumId={parseInt(id)} id={1} client:visible />
+  </button>
+</a>
+
+<style>
+  .album:hover button {
+    opacity: 1;
+  }
+</style>

@@ -1,0 +1,46 @@
+---
+import IndexAlbum from "../components/IndexAlbum.astro";
+import Back from "../icons/Back.astro";
+import Layout from "../layouts/Layout.astro";
+import MFYAlbum from "../components/MFYAlbum.astro";
+import { playlists } from "../lib/data";
+---
+
+<Layout title="Spotify Clone | TomasDevCF">
+  <div class="albums-container relative bg-green-600 p-2 min-h-[300px]">
+    <a
+      href="/"
+      class="bg-black rounded-full w-8 h-8 flex justify-center items-center p-2"
+      ><Back /></a
+    >
+    <h1 class="text-3xl font-bold py-3 px-2 relative z-20">Good afternoon</h1>
+    <div
+      class="index-albums grid xl:grid-cols-3 gap-2 sm:grid-cols-2 grid-cols-1"
+    >
+      {
+        playlists.map((pl) => (
+          <IndexAlbum id={pl.id} image={pl.cover} title={pl.title} />
+        ))
+      }
+    </div>
+    <div
+      class="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/80"
+    >
+    </div>
+  </div>
+  <div class="made-for-you">
+    <h1 class="text-3xl font-bold py-3 px-2 relative z-20">Made for you</h1>
+    <div class="flex flex-wrap gap-2 px-2 pb-2">
+      {
+        playlists.map((pl) => (
+          <MFYAlbum
+            artists={pl.artists}
+            image={pl.cover}
+            title={pl.title}
+            id={pl.id}
+          />
+        ))
+      }
+    </div>
+  </div>
+</Layout>

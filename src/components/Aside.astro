@@ -1,0 +1,41 @@
+---
+import Home from "../icons/Home.astro";
+import Library from "../icons/Library.astro";
+import Search from "../icons/Search.astro";
+import { playlists } from "../lib/data";
+import AsideAlbum from "./AsideAlbum.astro";
+---
+
+<aside class="flex flex-col gap-2 text-zinc-400 overflow-hidden">
+  <nav class="bg-zinc-900 rounded-lg">
+    <ul>
+      <a
+        href="/"
+        class="flex gap-4 hover:text-white transition duration-100 ease-in-out p-4 items-end text-sm"
+        ><Home /> <span class="hidden lg:inline">Home</span></a
+      >
+      <a
+        href="#"
+        class="flex gap-4 hover:text-white transition duration-100 ease-in-out p-4 items-end text-sm"
+        ><Search /> <span class="hidden lg:inline">Search</span></a
+      >
+    </ul>
+  </nav>
+  <div class="bg-zinc-900 rounded-lg flex-1">
+    <a
+      href="#"
+      class="flex gap-4 hover:text-white transition duration-100 ease-in-out p-4 items-center text-sm"
+      ><Library /> <span class="hidden lg:inline">Your library</span></a
+    >
+    {
+      playlists.map((pl) => (
+        <AsideAlbum
+          artists={pl.artists}
+          image={pl.cover}
+          title={pl.title}
+          id={pl.id}
+        />
+      ))
+    }
+  </div>
+</aside>

@@ -1,0 +1,21 @@
+---
+interface Props {
+  id: string;
+  title: string;
+  artists: string[];
+  image: string;
+}
+
+const { id, title, artists, image } = Astro.props;
+---
+
+<a
+  href={`/album/${id}`}
+  class="w-full rounded-lg shadow-2xl h-16 cursor-pointer hover:bg-gray-600 hover:text-black transition-colors gap-4 flex p-2"
+>
+  <img class="h-auto rounded-lg" src={image} alt={title} />
+  <div class="album-aside-info hidden flex-col lg:flex">
+    <b>{title}</b>
+    <p>{artists.join(", ")}</p>
+  </div>
+</a>

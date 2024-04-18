@@ -1,0 +1,116 @@
+---
+import { allPlaylists, playlists, songs } from "../../lib/data";
+import Layout from "../../layouts/Layout.astro";
+import Back from "../../icons/Back.astro";
+import Play from "../../icons/Play.astro";
+import Time from "../../icons/Time.astro";
+import Heart from "../../icons/Heart.astro";
+import Menu from "../../icons/Menu.astro";
+import AlbumSong from "../../components/AlbumSong.astro";
+import { Image } from "astro:assets";
+import PlayButton from "../../components/PlayButton";
+
+export const getStaticPaths = () => {
+  return [
+    { params: { id: "1" } },
+    { params: { id: "2" } },
+    { params: { id: "3" } },
+    { params: { id: "4" } },
+    { params: { id: "5" } },
+  ];
+};
+
+const { id } = Astro.params;
+
+const playlist = allPlaylists.find((p) => p.id === id);
+const playlistSongs = songs.filter((s) => s.albumId === playlist?.albumId);
+---
+
+<Layout title={`Album #${id} | Spotify Clone`}>
+  <div
+    style={`backdrop-filter: blur(7px);     --tw-gradient-from: ${playlist?.color.accent}e6 var(--tw-gradient-from-position);
+      --tw-gradient-to: rgb(255 255 255 / 0) var(--tw-gradient-to-position);
+      --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);`}
+    class=`pt-2 relative z-10 bg-gradient-to-b overflow-x-hidden`
+    transition:name=`playlist ${id} container`
+  >
+    <a
+      href="/"
+      class="bg-black rounded-full w-8 h-8 flex justify-center items-center p-2 ms-2"
+      ><Back /></a
+    >
+    <div
+      class="playlist-info flex px-6 py-3 gap-2 md:flex-row flex-col md:items-start items-center"
+    >
+      {
+        playlist && (
+          <Image
+            src={playlist.cover}
+            alt={playlist.title}
+            height={240}
+            width={240}
+          />
+        )
+      }
+      <div class="md:px-7 flex flex-col gap-y-2 relative z-20 justify-center">
+        <p>Playlist</p>
+        <h1 class="text-6xl">{playlist?.title}</h1>
+        <p>{playlist?.artists.join(", ")}</p>
+        <p>40 likes, {playlistSongs.length} musics, about 12min 16s</p>
+      </div>
+    </div>
+    <div class="songs w-full bg-zinc-900/15 relative z-40 p-4">
+      <div class="action-btns flex gap-4 pb-4">
+        <button
+          class="bg-green-600 rounded-full h-14 w-14 flex items-center justify-center shadow-2x hover:bg-green-500 transition-colors"
+          ><PlayButton
+            albumId={playlist?.albumId ? playlist?.albumId : 1}
+            id={parseInt(id)}
+            client:visible
+          /></button
+        >
+        <button
+          class="ps-4 text-green-500 hover:scale-110 transition-transform"
+        >
+          <Heart />
+        </button>
+        <button class="text-gray-300 hover:text-gray-100 transition-colors">
+          <Menu />
+        </button>
+      </div>
+      <table class="table-auto w-full text-left min-w-[798px]">
+        <thead>
+          <tr class="font-normal text-gray-300 border-b-2 border-gray-400">
+            <th class="px-4 py-2">#</th>
+            <th class="px-4 py-2">Title</th>
+            <th class="px-4 py-2">Album</th>
+            <th class="text-right px-4 py-2"><Time /></th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            playlistSongs.map((s) => (
+              <AlbumSong
+                albumId={s.albumId}
+                album={s.album}
+                duration={s.duration}
+                id={s.id}
+                image={s.image}
+                singers={s.artists}
+                title={s.title}
+              />
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <div class="absolute h-screen inset-0 z-[-1] bg-gradient-to-b">
+      <img
+        src={playlist?.cover}
+        alt={playlist?.title}
+        class="z-[-1] absolute inset-0 mix-blend-overlay opacity-20 w-full h-full object-cover blur-md"
+      />
+    </div>
+  </div>
+</Layout>

@@ -1,0 +1,232 @@
+---
+import Home from "../icons/Home.astro";
+import Search from "../icons/Search.astro";
+import Library from "../icons/Library.astro";
+import { playlists } from "../lib/data";
+import AsideAlbum from "../components/AsideAlbum.astro";
+import Footer from "../components/Footer.tsx";
+import { ViewTransitions } from "astro:transitions";
+import Aside from "../components/Aside.astro";
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <ViewTransitions fallback="none" />
+  </head>
+  <body class="bg-black h-screen w-screen gap-2 p-2">
+    <Aside />
+    <main class="bg-zinc-900 rounded-lg overflow-y-auto relative">
+      <slot />
+    </main>
+    <Footer client:load transition:name="audio-player" transition:persist />
+
+    <style>
+      body {
+        display: grid;
+        grid-template-areas:
+          "aside main"
+          "footer footer";
+        grid-template-rows: 1fr 60px;
+        grid-template-columns: 350px 1fr;
+      }
+
+      @media (max-width: 1024px) {
+        body {
+          grid-template-columns: auto 1fr;
+        }
+      }
+
+      aside {
+        grid-area: aside;
+      }
+
+      main {
+        grid-area: main;
+      }
+    </style>
+
+    <style is:global>
+      html {
+        font-family: "CircularStd", system-ui, sans-serif;
+        background: #010101;
+        color: white;
+      }
+
+      footer {
+        grid-area: footer;
+      }
+
+      .input-range-container:hover .progress {
+        background: rgb(71, 189, 71);
+      }
+      
+      @media (max-width: 640px) {
+        .song-volume .input-range-container {
+          transform: rotate(270deg);
+          width: 50px;
+          position: absolute;
+        }
+
+        .song-volume .input-rage-container input[type="range"]::-webkit-slider-thumb {
+          margin-top: 0;
+          margin-right: -3px;
+        }
+      }
+
+      input[type="range"] {
+        -webkit-appearance: none;
+        position: relative;
+        width: 100%;
+        z-index: 2;
+        background: transparent;
+      }
+      input[type="range"]:focus {
+        outline: none;
+      }
+      input[type="range"]::-webkit-slider-runnable-track {
+        width: 100%;
+        height: 8px;
+        cursor: pointer;
+        animate: 0.2s;
+        box-shadow: 0px 0px 0px #000000;
+        background: transparent;
+        border-radius: 10px;
+        border: 0px solid #000000;
+      }
+      input[type="range"]::-webkit-slider-thumb {
+        box-shadow: 0px 0px 1px #000000;
+        border: 0px solid #000000;
+        height: 12px;
+        width: 12px;
+        border-radius: 10px;
+        background: #ffffff;
+        margin-top: -3px;
+        cursor: pointer;
+        -webkit-appearance: none;
+        scale: 0;
+        transition: scale ease-in-out 0.1s;
+        z-index: 1;
+      }
+      input[type="range"]:hover::-webkit-slider-thumb {
+        scale: 1;
+      }
+      input[type="range"]:focus::-webkit-slider-runnable-track {
+        background: transparent;
+      }
+      .input-range-container {
+        cursor: pointer;
+      }
+      .input-range-container:hover input[type="range"]::-webkit-slider-thumb {
+        scale: 1;
+      }
+      input[type="range"]::-moz-range-track {
+        width: 100%;
+        height: 8px;
+        cursor: pointer;
+        animate: 0.2s;
+        box-shadow: 0px 0px 0px #000000;
+        background: transparent;
+        border-radius: 10px;
+        border: 0px solid #000000;
+      }
+      input[type="range"]::-moz-range-thumb {
+        box-shadow: 0px 0px 1px #000000;
+        border: 0px solid #000000;
+        height: 15px;
+        width: 15px;
+        border-radius: 10px;
+        background: #ffffff;
+        cursor: pointer;
+      }
+      input[type="range"]::-ms-track {
+        width: 100%;
+        height: 8px;
+        cursor: pointer;
+        animate: 0.2s;
+        background: transparent;
+        border-color: transparent;
+        color: transparent;
+      }
+      input[type="range"]::-ms-fill-lower {
+        background: transparent;
+        border: 0px solid #000000;
+        border-radius: 20px;
+        box-shadow: 0px 0px 0px #000000;
+      }
+      input[type="range"]::-ms-fill-upper {
+        background: transparent;
+        border: 0px solid #000000;
+        border-radius: 20px;
+        box-shadow: 0px 0px 0px #000000;
+      }
+      input[type="range"]::-ms-thumb {
+        box-shadow: 0px 0px 1px #000000;
+        border: 0px solid #000000;
+        height: 15px;
+        width: 15px;
+        border-radius: 10px;
+        background: #ffffff;
+        cursor: pointer;
+      }
+      input[type="range"]:focus::-ms-fill-lower {
+        background: transparent;
+      }
+      input[type="range"]:focus::-ms-fill-upper {
+        background: transparent;
+      }
+
+      @font-face {
+        font-family: "CircularStd";
+        src: url("/fonts/CircularStd-Medium.woff2") format("woff2");
+        font-weight: 500;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: "CircularStd";
+        src: url("/fonts/CircularStd-Book.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: "CircularStd";
+        src: url("/fonts/CircularStd-Light.woff2") format("woff2");
+        font-weight: 300;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: "CircularStd";
+        src: url("/fonts/CircularStd-Bold.woff2") format("woff2");
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: "CircularStd";
+        src: url("/fonts/CircularStd-Black.woff2") format("woff2");
+        font-weight: 900;
+        font-style: normal;
+        font-display: swap;
+      }
+    </style>
+  </body>
+</html>
