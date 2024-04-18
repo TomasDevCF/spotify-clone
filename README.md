@@ -10,4 +10,19 @@ Este proyecto es una réplica de la interfaz y funcionalidad básica de Spotify,
 - **Control Manual de Canciones**: Se puede pasar a la siguiente canción o a la canción anterior manualmente.
 - **Diseño Responsive**: La web es responsive y se adapta a diferentes dispositivos, incluyendo celulares, tablets y computadoras.
 
-Este proyecto sirve como una demostración de mis habilidades con Astro, React y TailwindCSS.
+## Instalación
+
+Para instalar y ejecutar este proyecto, sigue estos pasos:
+
+1. Clona el repositorio en tu máquina local utilizando `git clone https://github.com/TomasDevCF/spotify-clone.git`
+2. Navega al directorio del proyecto con `cd spotify-clone`
+3. Instala las dependencias necesarias con `npm install`
+4. Inicia el servidor de desarrollo con `npm run dev`
+
+## Uso
+
+Una vez que el servidor esté en funcionamiento, puedes abrir tu navegador y visitar `http://localhost:4321` para ver la aplicación en acción.
+
+Puedes interactuar con la interfaz de usuario para reproducir canciones, ajustar el volumen y el tiempo de reproducción, y cambiar de canción manualmente. La interfaz se adapta a diferentes tamaños de pantalla, por lo que puedes probarla en tu teléfono, tablet o computadora.
+
+Recuerda que este proyecto es solo una demostración.
