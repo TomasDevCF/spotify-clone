@@ -10,4 +10,4 @@ Este proyecto es una réplica de la interfaz y funcionalidad básica de Spotify,
 - **Control Manual de Canciones**: Se puede pasar a la siguiente canción o a la canción anterior manualmente.
 - **Diseño Responsive**: La web es responsive y se adapta a diferentes dispositivos, incluyendo celulares, tablets y computadoras.
 
-Este proyecto sirve como una demostración de mis habilidades con Astro, React y TailwindCSS. ¡Espero que lo encuentres útil e interesante!
+Este proyecto sirve como una demostración de mis habilidades con Astro, React y TailwindCSS.
