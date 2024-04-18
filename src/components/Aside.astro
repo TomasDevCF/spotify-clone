@@ -21,7 +21,7 @@ import AsideAlbum from "./AsideAlbum.astro";
       >
     </ul>
   </nav>
-  <div class="bg-zinc-900 rounded-lg flex-1">
+  <div class="bg-zinc-900 rounded-lg flex-1 calc-height">
     <a
       href="#"
       class="flex gap-4 hover:text-white transition duration-100 ease-in-out p-4 items-center text-sm"
@@ -39,3 +39,9 @@ import AsideAlbum from "./AsideAlbum.astro";
     }
   </div>
 </aside>
+
+<style>
+  .calc-height {
+    height: calc(100vh - 80px);
+  }
+</style>

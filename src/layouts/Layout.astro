@@ -39,7 +39,7 @@ const { title } = Astro.props;
         grid-template-areas:
           "aside main"
           "footer footer";
-        grid-template-rows: 1fr 60px;
+        grid-template-rows: calc(100vh - 80px) 60px;
         grid-template-columns: 350px 1fr;
       }
 
@@ -72,7 +72,7 @@ const { title } = Astro.props;
       .input-range-container:hover .progress {
         background: rgb(71, 189, 71);
       }
-      
+
       @media (max-width: 640px) {
         .song-volume .input-range-container {
           transform: rotate(270deg);
@@ -80,7 +80,9 @@ const { title } = Astro.props;
           position: absolute;
         }
 
-        .song-volume .input-rage-container input[type="range"]::-webkit-slider-thumb {
+        .song-volume
+          .input-rage-container
+          input[type="range"]::-webkit-slider-thumb {
           margin-top: 0;
           margin-right: -3px;
         }
