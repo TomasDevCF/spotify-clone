@@ -22,12 +22,12 @@ let { title, album, id, duration, image, singers, albumId } = Astro.props;
   <td class="flex gap-2 items-center py-2 px-4">
     <img src={image} alt={title} class="h-12" />
     <div class="flex flex-col">
-      <p>{title}</p>
-      <p>{singers.join(", ")}</p>
+      <p class="text-ellipsis overflow-hidden text-nowrap">{title}</p>
+      <p class="text-ellipsis overflow-hidden text-nowrap">{singers.join(", ")}</p>
     </div>
   </td>
-  <td class="py-2 px-4">{album}</td>
-  <td class="py-2 px-4 text-right">{duration}</td>
+  <td class="py-2 px-4 sm:table-cell hidden">{album}</td>
+  <td class="py-2 px-4 text-right md:table-cell hidden">{duration}</td>
 </tr>
 
 <style is:global>

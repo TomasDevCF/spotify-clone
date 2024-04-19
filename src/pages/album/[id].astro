@@ -78,13 +78,13 @@ const playlistSongs = songs.filter((s) => s.albumId === playlist?.albumId);
           <Menu />
         </button>
       </div>
-      <table class="table-auto w-full text-left min-w-[798px]">
+      <table class="table-auto w-full text-left">
         <thead>
           <tr class="font-normal text-gray-300 border-b-2 border-gray-400">
             <th class="px-4 py-2">#</th>
             <th class="px-4 py-2">Title</th>
-            <th class="px-4 py-2">Album</th>
-            <th class="text-right px-4 py-2"><Time /></th>
+            <th class="px-4 py-2 sm:table-cell hidden">Album</th>
+            <th class="text-right px-4 py-2 md:table-cell hidden"><Time /></th>
           </tr>
         </thead>
         <tbody>
@@ -105,7 +105,7 @@ const playlistSongs = songs.filter((s) => s.albumId === playlist?.albumId);
       </table>
     </div>
 
-    <div class="absolute h-screen inset-0 z-[-1] bg-gradient-to-b">
+    <div class="absolute h-full inset-0 z-[-1] bg-gradient-to-b">
       <img
         src={playlist?.cover}
         alt={playlist?.title}

@@ -26,7 +26,7 @@ const { title } = Astro.props;
     <title>{title}</title>
     <ViewTransitions fallback="none" />
   </head>
-  <body class="bg-black h-screen w-screen gap-2 p-2">
+  <body class="bg-black h-svh w-screen gap-2 p-2">
     <Aside />
     <main class="bg-zinc-900 rounded-lg overflow-y-auto relative">
       <slot />
@@ -39,7 +39,7 @@ const { title } = Astro.props;
         grid-template-areas:
           "aside main"
           "footer footer";
-        grid-template-rows: calc(100vh - 80px) 60px;
+        grid-template-rows: 1fr 60px;
         grid-template-columns: 350px 1fr;
       }
 
@@ -47,10 +47,6 @@ const { title } = Astro.props;
         body {
           grid-template-columns: auto 1fr;
         }
-      }
-
-      aside {
-        grid-area: aside;
       }
 
       main {
@@ -63,6 +59,10 @@ const { title } = Astro.props;
         font-family: "CircularStd", system-ui, sans-serif;
         background: #010101;
         color: white;
+      }
+
+      aside {
+        grid-area: aside;
       }
 
       footer {
@@ -81,8 +81,10 @@ const { title } = Astro.props;
         }
 
         .song-volume
-          .input-rage-container
-          input[type="range"]::-webkit-slider-thumb {
+          .input-range-container
+          input[type="range"]::-webkit-slider-thumb,
+        .input-range-container input[type="range"]::-moz-range-thumb,
+        .input-range-container input[type="range"]::-ms-thumb {
           margin-top: 0;
           margin-right: -3px;
         }
@@ -131,7 +133,9 @@ const { title } = Astro.props;
       .input-range-container {
         cursor: pointer;
       }
-      .input-range-container:hover input[type="range"]::-webkit-slider-thumb {
+      .input-range-container:hover input[type="range"]::-webkit-slider-thumb,
+      .input-range-container:hover input[type="range"]::-moz-range-thumb,
+      .input-range-container:hover input[type="range"]::-ms-thumb {
         scale: 1;
       }
       input[type="range"]::-moz-range-track {
@@ -147,41 +151,40 @@ const { title } = Astro.props;
       input[type="range"]::-moz-range-thumb {
         box-shadow: 0px 0px 1px #000000;
         border: 0px solid #000000;
-        height: 15px;
-        width: 15px;
+        height: 12px;
+        width: 12px;
         border-radius: 10px;
         background: #ffffff;
+        margin-top: -3px;
         cursor: pointer;
+        -webkit-appearance: none;
+        scale: 0;
+        transition: scale ease-in-out 0.1s;
+        z-index: 1;
       }
       input[type="range"]::-ms-track {
         width: 100%;
         height: 8px;
         cursor: pointer;
         animate: 0.2s;
-        background: transparent;
-        border-color: transparent;
-        color: transparent;
-      }
-      input[type="range"]::-ms-fill-lower {
-        background: transparent;
-        border: 0px solid #000000;
-        border-radius: 20px;
         box-shadow: 0px 0px 0px #000000;
-      }
-      input[type="range"]::-ms-fill-upper {
         background: transparent;
+        border-radius: 10px;
         border: 0px solid #000000;
-        border-radius: 20px;
-        box-shadow: 0px 0px 0px #000000;
       }
       input[type="range"]::-ms-thumb {
         box-shadow: 0px 0px 1px #000000;
         border: 0px solid #000000;
-        height: 15px;
-        width: 15px;
+        height: 12px;
+        width: 12px;
         border-radius: 10px;
         background: #ffffff;
+        margin-top: -3px;
         cursor: pointer;
+        -webkit-appearance: none;
+        scale: 0;
+        transition: scale ease-in-out 0.1s;
+        z-index: 1;
       }
       input[type="range"]:focus::-ms-fill-lower {
         background: transparent;
